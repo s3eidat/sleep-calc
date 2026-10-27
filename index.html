@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' data: blob:; connect-src 'self' data: blob:; worker-src 'self' blob:; manifest-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Sleep Calc — Best Time to Sleep and Wake Up (Sleep Cycles) | S3eidat Tools</title>
+<meta name="description" content="Free sleep cycle calculator: pick a wake-up time to get bedtimes, or a bedtime to get wake-up times, in 90-minute cycles plus time to fall asleep. Nap guide, 12 or 24 hour clock. Private, runs in your browser.">
+<meta property="og:title" content="Sleep Calc — when to sleep and wake up">
+<meta property="og:description" content="Bedtimes and wake-up times in whole sleep cycles. Runs 100% in your browser.">
+<link rel="icon" href="kit/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="kit/kit.css">
+<link rel="stylesheet" href="app.css">
+<script src="kit/kit.js"></script>
+<!--s3:seo-->
+<link rel="canonical" href="https://s3eidat.github.io/sleep-calc/">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0d0f12">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="S3eidat Tools">
+<meta property="og:url" content="https://s3eidat.github.io/sleep-calc/">
+<meta property="og:image" content="https://s3eidat.github.io/sleep-calc/screenshot.png">
+<meta property="og:image:width" content="1280"><meta property="og:image:height" content="800">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sleep Calc — Best times to sleep and wake up">
+<meta name="twitter:description" content="Best times to sleep and wake up. Free, private and runs 100% in your browser: no sign-up, no uploads.">
+<meta name="twitter:image" content="https://s3eidat.github.io/sleep-calc/screenshot.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Sleep Calc", "url": "https://s3eidat.github.io/sleep-calc/", "description": "Best times to sleep and wake up. Free, private and runs 100% in your browser: no sign-up, no uploads.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any (web browser)", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "image": "https://s3eidat.github.io/sleep-calc/screenshot.png", "author": {"@type": "Person", "name": "s3eidat", "url": "https://github.com/s3eidat"}}</script>
+<!--/s3:seo-->
+</head>
+<body data-tool="sleep-calc">
+<main class="s3-main">
+  <section class="s3-hero">
+    <h1>Sleep Calc</h1>
+    <p>Pick when you need to wake up and get bedtimes that end on a full sleep cycle, or see when to set the alarm if you go to bed now.</p>
+  </section>
+
+  <section class="card">
+    <div class="row between">
+      <div class="seg" id="mode" role="group" aria-label="What do you know?">
+        <button aria-pressed="true" data-v="wake">I need to wake up at</button>
+        <button aria-pressed="false" data-v="bed">I'll go to bed at</button>
+        <button aria-pressed="false" data-v="now">Going to sleep now</button>
+      </div>
+      <div class="seg" id="clock" role="group" aria-label="Clock format">
+        <button aria-pressed="true" data-v="12">12 h</button>
+        <button aria-pressed="false" data-v="24">24 h</button>
+      </div>
+    </div>
+    <div class="sc-inputs mt">
+      <label class="field" id="timeWrap"><span id="timeLbl">Wake-up time</span>
+        <input class="input sc-time" type="time" id="time" value="07:00">
+      </label>
+      <label class="field"><span>Time to fall asleep: <span class="sc-v" id="fallV">15 min</span></span>
+        <input type="range" id="fall" min="0" max="60" step="5" value="15">
+      </label>
+      <label class="field"><span>Cycle length: <span class="sc-v" id="cycV">90 min</span></span>
+        <input type="range" id="cyc" min="70" max="110" step="5" value="90">
+      </label>
+    </div>
+  </section>
+
+  <section class="card mt">
+    <div class="row between">
+      <h2 id="resTitle">Go to bed at</h2>
+      <button class="btn small" id="copy"><svg class="i"><use href="#i-copy"/></svg>Copy</button>
+    </div>
+    <div class="sc-res" id="res" aria-live="polite"></div>
+    <p class="faint" id="resNote"></p>
+  </section>
+
+  <div class="grid-2 mt sc-lower">
+    <section class="card">
+      <h2>Nap guide</h2>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th>Nap</th><th>What it does</th><th>Nap now, wake at</th></tr></thead>
+          <tbody id="naps"></tbody>
+        </table>
+      </div>
+      <p class="faint">"Wake at" includes your time to fall asleep. Early afternoon (roughly 1–3 pm) is the easiest time to nap without hurting the night's sleep.</p>
+    </section>
+    <section class="card sc-why">
+      <h2>How this works, honestly</h2>
+      <p>Sleep runs in cycles of light, deep and REM sleep. A cycle is <b>about 90 minutes on average</b>, but it varies from roughly 70 to 120 minutes between people and through the night, so treat these times as a guide, not a rule.</p>
+      <p>Waking near the end of a cycle, in lighter sleep, tends to feel easier than being pulled out of deep sleep. That's all this calculator aims for.</p>
+      <p><b>Total sleep matters most.</b> Most adults need 7 to 9 hours; teenagers need more. Five or six cycles fits that; four is a short night.</p>
+      <p class="faint">Not medical advice. If you're often tired despite enough sleep, talk to a doctor.</p>
+    </section>
+  </div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
